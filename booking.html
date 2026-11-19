@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Book a table · Cha/Té</title>
+<meta name="description" content="Cha/Té: a pop-up tasting menu through the world's tea rituals. 1–12 February 2027, Institut Lyfe, Écully.">
+<meta name="theme-color" content="#F1E7CF">
+<link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Jost:wght@300;400;500&display=swap">
+<link rel="stylesheet" href="assets/css/site.css">
+<link rel="stylesheet" href="assets/css/pages.css">
+</head>
+<body class="paper page-booking">
+<main>
+<header class="page-head"><div class="wrap head-grid">
+  <svg class="wash" id="wash" aria-hidden="true"></svg>
+  <div class="head-text">
+    <h1 data-t="booking.title"></h1>
+    <p class="lede" data-t="booking.lede"></p>
+  </div>
+  <figure class="head-photo ph"><img src="assets/img/teas/room.webp" alt="" decoding="async" fetchpriority="high"></figure>
+</div></header>
+
+<section class="section"><div class="wrap two">
+  <div>
+    <h2 data-t="booking.hoursTitle"></h2>
+    <p class="tbc" data-t="booking.hoursNote"></p>
+    <dl class="hours" id="hours"></dl>
+  </div>
+  <div>
+    <h2 data-t="booking.whereTitle"></h2>
+    <p class="addr" data-addr></p>
+    <p><a class="link" data-maps target="_blank" rel="noopener"><span data-t="booking.mapLink"></span></a></p>
+    <div class="book-box">
+      <a class="btn" id="book-online" aria-disabled="true"><span data-t="booking.button"></span></a>
+      <p class="note" id="book-soon" data-t="booking.soon"></p>
+      <a class="btn ghost" data-mail="booking.mailSubject"><span data-t="booking.emailBook"></span></a>
+    </div>
+  </div>
+</div></section>
+</main>
+<script src="assets/js/content.js"></script>
+<script src="assets/js/logo.js"></script>
+<script src="assets/js/common.js"></script>
+<script src="assets/js/pages.js"></script>
+</body>
+</html>

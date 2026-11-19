@@ -1,0 +1,143 @@
+/* Home: the scroll journey */
+.act{position:relative}
+.act .stick{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden;overflow:clip}
+
+/* ---------- ACTS 1 + 2: one pinned stage ----------
+   Only transform and opacity are animated on scroll, so the browser can keep everything on the GPU. */
+.act-story{height:720vh;background:var(--wood)}
+.ink-layer,.cup-layer{position:absolute;inset:0;overflow:hidden;overflow:clip}
+.ink-layer{z-index:1}
+.cup-layer{z-index:2;opacity:0;visibility:hidden;background:var(--wood);color:var(--cream);will-change:opacity}
+
+.mtn{position:absolute;inset:0;pointer-events:none;will-change:transform}
+.mtn img{position:absolute;left:50%;bottom:-9vh;width:max(110vw,170vh);height:auto;max-width:none;transform:translateX(-50%)}
+.mtn.far{opacity:.8}
+.mtn.mid{opacity:.82}
+.mist{position:absolute;left:-20%;right:-20%;pointer-events:none;background:radial-gradient(50% 50% at 50% 50%,rgba(250,244,228,.92),rgba(250,244,228,0) 70%);will-change:transform}
+.mist.m1{height:38%;bottom:16%;animation:drift 38s linear infinite alternate}
+.mist.m2{height:30%;bottom:-6%;opacity:.9;animation:drift 52s linear infinite alternate-reverse}
+@keyframes drift{from{transform:translateX(-6%)}to{transform:translateX(6%)}}
+
+.hero-logo-wrap{position:absolute;inset:0;display:grid;place-items:center;pointer-events:none;z-index:3}
+.logo-zoom{display:grid;place-items:center;margin-top:-6vh}
+.logo-zoom>svg{grid-area:1/1}
+.hero-logo{width:min(54vh,74vw);height:auto;aspect-ratio:659.5/668.9;overflow:visible;fill:var(--green)}
+.logo-wash{opacity:0;will-change:opacity}
+
+.hero-copy{position:absolute;left:0;right:0;bottom:max(9vh,4.5rem);z-index:4;text-align:center;padding-inline:var(--gutter);opacity:0;transform:translateY(16px);display:grid;gap:.55rem;justify-items:center;will-change:transform,opacity}
+.hero-line{font-family:var(--f-display);font-style:italic;font-size:var(--step-2);color:var(--green);line-height:1.15;max-width:24ch}
+.hero-meta{font-size:.82rem;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-soft)}
+
+.scroll-hint{position:absolute;left:50%;bottom:calc(1.6rem + env(safe-area-inset-bottom,0px));transform:translateX(-50%);display:grid;justify-items:center;gap:.5rem;font-size:.7rem;letter-spacing:.32em;text-transform:uppercase;color:var(--green);z-index:4}
+.scroll-hint i{width:1px;height:42px;background:linear-gradient(var(--green),transparent);animation:hint 2.2s ease-in-out infinite;transform-origin:top}
+@keyframes hint{0%{transform:scaleY(0)}50%{transform:scaleY(1)}100%{transform:scaleY(1);opacity:0}}
+
+/* the tea room */
+.scene{position:absolute;inset:0;--cup-x:55;--cup-y:47;--zoom-x:55%;--zoom-y:52%;transform-origin:var(--zoom-x) var(--zoom-y);will-change:transform}
+@media (max-aspect-ratio:4/5){.scene{--cup-x:34;--cup-y:31;--zoom-x:34%;--zoom-y:35%}}
+/* .imgbox is sized by JS to cover the stage exactly like object-fit:cover, so the teapot layers can sit on the photo by percentage */
+.imgbox{position:absolute;left:0;top:0;width:100%;height:100%}
+.imgbox picture,.scene-img{position:absolute;inset:0;width:100%;height:100%;display:block}
+.scene-img{background:radial-gradient(60% 60% at 62% 60%,#3a2a1d 0,#1a120c 70%)}
+/* the ink painting of the same scene, soaked into the photograph by a small WebGL shader */
+.fx{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;visibility:hidden}
+/* the pour: a short film whose first and last frames are the photograph itself */
+.pour-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;pointer-events:none;opacity:0;visibility:hidden;transition:opacity .45s ease,visibility 0s .45s}
+.pour-video.on{opacity:1;visibility:visible;transition:opacity .3s ease}
+.pot-hit{position:absolute}
+.pot-hit{background:none;border:0;padding:0;border-radius:45%;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.pot-hit:focus-visible{outline:2px solid var(--gold);outline-offset:4px}
+.pot-hit::after{content:"";position:absolute;left:46%;top:38%;width:14px;height:14px;margin:-7px;border-radius:50%;background:rgba(244,235,214,.9);box-shadow:0 0 0 0 rgba(244,235,214,.5);opacity:0;transition:opacity .6s;animation:potpulse 2.4s ease-out infinite}
+.cup-layer.ready .pot-hit::after{opacity:.85}
+.cup-layer.pouring .pot-hit::after,.cup-layer.poured .pot-hit::after{opacity:0}
+@keyframes potpulse{0%{box-shadow:0 0 0 0 rgba(244,235,214,.5)}70%,100%{box-shadow:0 0 0 22px rgba(244,235,214,0)}}
+.steam{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;transition:opacity .6s}
+.cup-layer.pouring .steam{opacity:0}
+.scene-shade{position:absolute;inset:0;will-change:opacity;background:linear-gradient(90deg,rgba(14,10,7,.88) 0,rgba(14,10,7,.55) 34%,rgba(14,10,7,0) 60%),linear-gradient(0deg,rgba(14,10,7,.6),rgba(14,10,7,0) 30%);pointer-events:none}
+.cup-copy{position:absolute;left:max(var(--gutter),6vw);top:50%;transform:translateY(-50%);width:min(30rem,calc(100% - 2*var(--gutter)));display:grid;gap:1rem;z-index:2;pointer-events:none}
+.cup-copy h2{font-size:var(--step-3);color:var(--cream)}
+.cup-paras{display:grid;gap:1rem}
+.cup-paras p{color:rgba(244,235,214,.86);font-weight:300;opacity:0;transform:translateY(14px);transition:opacity .7s,transform .7s}
+.cup-paras p.in{opacity:1;transform:none}
+.cup-paras em{font-family:var(--f-display);font-size:1.18em;color:var(--gold)}
+.cup-copy .kicker,.cup-copy h2{opacity:0;transform:translateY(14px);transition:opacity .8s,transform .8s}
+.cup-copy.in .kicker,.cup-copy.in h2{opacity:1;transform:none}
+.pour-btn{justify-self:start;margin-top:.6rem;opacity:0;transform:translateY(14px);transition:opacity .7s,transform .7s;pointer-events:none}
+.cup-layer.ready .pour-btn{opacity:1;transform:none;pointer-events:auto}
+.cup-layer.pouring .pour-btn{opacity:.45;pointer-events:none}
+@media (max-width:760px){
+  .scene-shade{background:linear-gradient(0deg,rgba(14,10,7,.94) 0,rgba(14,10,7,.7) 45%,rgba(14,10,7,0) 75%)}
+  .cup-copy{top:auto;bottom:calc(1.5rem + env(safe-area-inset-bottom,0px));transform:none}
+  .cup-paras p{font-size:.95rem}
+}
+
+/* ---------- ACT 3: globe ---------- */
+.act-globe{position:relative;background:radial-gradient(120% 80% at 40% 45%,#0d1524 0,#080c16 55%,#05070c 100%);color:var(--cream);padding:clamp(5rem,10vw,8rem) 0 clamp(3rem,6vw,5rem);overflow:hidden}
+.globe-head{display:grid;gap:1rem;justify-items:center;text-align:center;position:relative;z-index:2;pointer-events:none;text-shadow:0 2px 24px rgba(5,7,12,.9)}
+.globe-head h2{font-size:var(--step-3);max-width:20ch}
+.globe-intro{color:rgba(244,235,214,.75);max-width:52ch;font-weight:300}
+.legend{list-style:none;margin:.4rem 0 0;padding:0;display:flex;flex-wrap:wrap;justify-content:center;gap:.5rem 1.6rem;font-size:.86rem;color:rgba(244,235,214,.8)}
+.legend li{display:flex;align-items:center;gap:.5rem}
+.legend b{font-family:var(--f-display);font-size:1.15em;font-style:italic;color:var(--cream)}
+.dot{width:10px;height:10px;border-radius:50%;display:inline-block;box-shadow:0 0 10px currentColor}
+.dot.cha{background:#8fc79a;color:#8fc79a}
+.dot.te{background:#e9eef2;color:#e9eef2}
+.dot.other{background:#e08a66;color:#e08a66}
+.dot.course{background:#c49a45;color:#c49a45}
+.globe-stage{position:relative;height:min(94vh,1000px);margin-top:-7rem}
+/* tilt-shift: the top and bottom of the picture fall out of focus, like a photo of a small model */
+.globe-dof{position:absolute;left:0;right:0;height:26%;pointer-events:none;z-index:1;backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
+.globe-dof.top{top:0;-webkit-mask-image:linear-gradient(#000 15%,transparent);mask-image:linear-gradient(#000 15%,transparent)}
+.globe-dof.bottom{bottom:0;height:30%;-webkit-mask-image:linear-gradient(transparent,#000 85%);mask-image:linear-gradient(transparent,#000 85%)}
+.globe-vignette{position:absolute;inset:0;pointer-events:none;z-index:1;background:radial-gradient(90% 80% at 42% 52%,rgba(5,7,12,0) 55%,rgba(5,7,12,.7) 100%),linear-gradient(#080c16 0,rgba(8,12,22,0) 16%,rgba(5,7,12,0) 84%,#05070c 100%)}
+#globe-canvas{width:100%;height:100%;cursor:grab;touch-action:none}
+#globe-canvas.drag{cursor:grabbing}
+#globe-canvas.hover{cursor:pointer}
+.globe-tip{position:absolute;z-index:3;pointer-events:none;transform:translate(-50%,calc(-100% - 14px));background:rgba(9,13,22,.9);border:1px solid rgba(196,154,69,.5);color:var(--cream);font-size:.82rem;letter-spacing:.06em;padding:.35rem .7rem;border-radius:999px;white-space:nowrap}
+.globe-fallback{position:absolute;inset:8% 10%;background:url(../earth/earth-color.jpg) center/contain no-repeat;opacity:.8}
+.tea-panel{position:absolute;z-index:4;right:max(var(--gutter),5vw);top:50%;transform:translateY(-50%);width:min(25rem,calc(100% - 2*var(--gutter)));max-height:calc(100% - 2rem);overflow:auto;background:rgba(9,13,22,.94);border:1px solid rgba(196,154,69,.35);border-radius:18px;padding:1.6rem 1.6rem 1.4rem;box-shadow:0 30px 80px rgba(0,0,0,.5);animation:panel .45s cubic-bezier(.2,.8,.2,1)}
+@keyframes panel{from{opacity:0;transform:translateY(-46%)}to{opacity:1;transform:translateY(-50%)}}
+.tea-panel h3{font-size:var(--step-2);color:var(--cream);margin:.2rem 2rem .9rem 0}
+.tea-word{font-family:var(--f-display);font-style:italic;font-size:1.05rem;color:var(--gold)}
+.tea-panel dl{margin:0;display:grid;gap:.25rem}
+.tea-panel dt{font-size:.68rem;letter-spacing:.3em;text-transform:uppercase;color:var(--gold);margin-top:.8rem}
+.tea-panel dd{margin:0;color:rgba(244,235,214,.88);font-weight:300;font-size:.97rem;line-height:1.55}
+.tea-close{position:absolute;top:.9rem;right:.9rem;background:none;border:1px solid rgba(244,235,214,.3);border-radius:50%;width:38px;height:38px;display:grid;place-items:center;color:var(--cream);cursor:pointer}
+@media (max-width:760px){
+  .globe-stage{height:78svh;margin-top:-2rem}
+  .globe-dof{display:none}
+  .tea-panel{top:auto;bottom:.6rem;transform:none;left:var(--gutter);right:var(--gutter);width:auto;max-height:62%;animation:sheet .4s cubic-bezier(.2,.8,.2,1)}
+  @keyframes sheet{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}
+}
+.list-title{font-family:var(--f-body);font-size:.72rem;letter-spacing:.32em;text-transform:uppercase;color:var(--gold);font-weight:500;margin:1.5rem 0 1rem;text-align:center}
+.place-list{display:flex;flex-wrap:wrap;justify-content:center;gap:.5rem}
+.place-list button{background:rgba(244,235,214,.05);border:1px solid rgba(244,235,214,.18);color:rgba(244,235,214,.85);font:inherit;font-size:.86rem;padding:.45rem .9rem;border-radius:999px;cursor:pointer;display:inline-flex;align-items:center;gap:.5rem;min-height:40px}
+.place-list button:hover,.place-list button[aria-pressed="true"]{border-color:var(--gold);color:var(--cream);background:rgba(196,154,69,.14)}
+.place-list .dot{width:7px;height:7px}
+.data-note{text-align:center;font-size:.76rem;color:rgba(244,235,214,.45);margin-top:2rem}
+
+/* ---------- doors ---------- */
+.doors{padding:clamp(4.5rem,9vw,7rem) 0}
+.doors h2{font-size:var(--step-3);color:var(--green);text-align:center;margin-bottom:clamp(2rem,5vw,3.5rem)}
+.door-grid{display:grid;gap:1rem}
+@media (min-width:700px){.door-grid{grid-template-columns:repeat(2,1fr)}}
+@media (min-width:1100px){.door-grid{grid-template-columns:repeat(4,1fr)}}
+.door{position:relative;display:grid;gap:.6rem;align-content:end;min-height:15rem;padding:1.6rem;border:1px solid var(--line);border-radius:4px;text-decoration:none;background:rgba(255,252,242,.45);overflow:hidden;transition:background .3s,color .3s,border-color .3s,transform .3s cubic-bezier(.2,.7,.2,1),box-shadow .3s}
+.door h3{font-size:var(--step-2);color:var(--green);transition:color .3s}
+.door p{color:var(--ink-soft);font-size:.95rem;transition:color .3s}
+.door .enso{position:absolute;top:1.2rem;right:1.2rem;width:54px;fill:var(--green);opacity:.75;transition:transform .6s,fill .3s}
+.door:hover{background:var(--green);border-color:var(--green);transform:translateY(-2px);box-shadow:0 18px 40px -24px rgba(19,36,26,.6)}
+.door:active{transform:translateY(0)}
+.door:hover h3{color:var(--cream)}
+.door:hover p{color:rgba(244,235,214,.8)}
+.door:hover .enso{fill:var(--gold);transform:rotate(-40deg)}
+
+/* ---------- reduced motion: everything visible, no pinning ---------- */
+@media (prefers-reduced-motion:reduce){
+  .act-story{height:auto}
+  .act-story .stick{position:relative;height:auto;overflow:visible}
+  .ink-layer,.cup-layer{position:relative;inset:auto;height:100svh}
+  .cup-layer{opacity:1;visibility:visible}
+  .hero-copy,.cup-paras p,.cup-copy .kicker,.cup-copy h2{opacity:1;transform:none}
+  .bloom,.scroll-hint{display:none}
+}
