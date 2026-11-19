@@ -37,7 +37,7 @@
     const name = (c) => (lang === "fr" ? C.places[c].fr : c);
     const team = $("#team");
     if (team) team.innerHTML = `<ul>${C.team.map((p) =>
-      `<li><b>${p.name}</b><span>${p.from.map(name).join(", ")}${p.heritage ? ` · ${T("about.heritage")}${lang === "fr" ? " : " : ": "}${p.heritage.map(name).join(", ")}` : ""}</span></li>`).join("")}</ul>`;
+      `<li><b>${p.name}${p.role ? `<small>${p.role[lang] || p.role.en}</small>` : ""}</b><span>${p.from.map(name).join(", ")}${p.heritage ? ` · ${T("about.heritage")}${lang === "fr" ? " : " : ": "}${p.heritage.map(name).join(", ")}` : ""}</span></li>`).join("")}</ul>`;
 
     const map = $("#dotmap");
     if (map) {

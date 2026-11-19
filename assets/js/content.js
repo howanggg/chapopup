@@ -232,8 +232,8 @@ window.CHATE = {
      --------------------------------------------------------------- */
   /* The team, in the order shown on the About page */
   team: [
-    { name: "Lam Ho Wang", from: ["Hong Kong"] },
-    { name: "Felix Lazaro", from: ["Australia"], heritage: ["France", "United Kingdom", "Myanmar"] },
+    { name: "Lam Ho Wang", role: { en: "Project manager", fr: "Chef de projet" }, from: ["Hong Kong"] },
+    { name: "Felix Lazaro", role: { en: "Project manager", fr: "Chef de projet" }, from: ["Australia"], heritage: ["France", "United Kingdom", "Myanmar"] },
     { name: "Sebastian DePue", from: ["USA"], heritage: ["Belgium", "Peru"] },
     { name: "Eva Weewennie", from: ["Malaysia"] },
     { name: "Andrea Farina", from: ["Italy"] },
