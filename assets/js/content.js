@@ -12,7 +12,7 @@
 window.CHATE = {
 
   contact: {
-    email: "popup.cha@gmail.com",
+    email: "contact@chapopup.fr",
     instagram: "https://www.instagram.com/cha.popup/",
     instagramHandle: "@cha.popup",
     address: "Institut Lyfe, 1A Chemin de Calabert, 69130 Écully",
