@@ -31,7 +31,7 @@
     const h = document.createElement("header");
     h.className = "site-top";
     h.innerHTML = `<div class="bar">
-      <a class="brand" href="index.html">${markSVG()}<span>CHA / TÉ</span></a>
+      <a class="brand" href="./">${markSVG()}<span>CHA / TÉ</span></a>
       <div class="top-right">
         <nav class="nav" id="site-nav" aria-label="Main">${pages.slice(1).map(([href, k]) =>
           `<a href="${href}" data-t="nav.${k}"${href === here ? ' aria-current="page"' : ""}></a>`).join("")}</nav>
